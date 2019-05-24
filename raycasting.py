@@ -1,35 +1,42 @@
+from boundary import Boundary
 import pygame
 
 # Define constants
 DISPLAY_WIDTH = 1280
 DISPLAY_HEIGHT = 720
-WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 
 pygame.init()
-gameDisplay = pygame.display.set_mode((DISPLAY_WIDTH, DISPLAY_HEIGHT))
-pygame.display.set_caption(f"Title")
-clock = pygame.time.Clock()
-background = pygame.Surface(gameDisplay.get_size())
-background = background.convert()
-background.fill(WHITE)
+pygame.display.set_caption(f"2D Raycasting")
 
-game_quit = False
+CLOCK = pygame.time.Clock()
 
-while not game_quit:
+GAME_SURFACE = pygame.display.set_mode((DISPLAY_WIDTH, DISPLAY_HEIGHT))
 
-    gameDisplay.blit(background, (0, 0))
+BACKGROUND = pygame.Surface(GAME_SURFACE.get_size())
+BACKGROUND = BACKGROUND.convert()
+BACKGROUND.fill(BLACK)
+
+GAME_QUIT = False
+
+
+b = Boundary(300, 300, 300, 100)
+
+while not GAME_QUIT:
+
+    GAME_SURFACE.blit(BACKGROUND, (0, 0))
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            game_quit = True
+            GAME_QUIT = True
         else:
-            print(event)
+            # print(event)
+            pass
 
-    pygame.draw.rect(gameDisplay, BLACK, (10, 10, 11, 21))
+    b.show(GAME_SURFACE)
 
     pygame.display.update()
-    clock.tick(60)
+    CLOCK.tick(60)
 
 pygame.quit()
 quit()

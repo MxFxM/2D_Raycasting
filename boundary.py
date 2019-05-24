@@ -1,7 +1,7 @@
 import pygame
 
 
-WHITE = (255, 2555, 255)
+WHITE = (255, 255, 255)
 
 
 class Boundary:
@@ -11,7 +11,7 @@ class Boundary:
         self.b_pos = (x2, y2)
 
     def show(self, surface):
-        pygame.draw.line(surface, BLACK, a_pos, b_pos)
+        pygame.draw.line(surface, WHITE, self.a_pos, self.b_pos)
 
 
 if __name__ == '__main__':
