@@ -1,5 +1,5 @@
 from boundary import Boundary
-from ray import Ray
+from particle import Particle
 import pygame
 
 # Define constants
@@ -23,9 +23,7 @@ GAME_QUIT = False
 
 
 wall = Boundary(300, 300, 300, 100)
-ray = Ray(100, 200, 0)
-
-ang = 0
+particle = Particle(500, 500, 10)
 
 while not GAME_QUIT:
 
@@ -40,17 +38,11 @@ while not GAME_QUIT:
 
     wall.show(GAME_SURFACE)
 
-    ray.look_at_angle(ang)
-    ray.position_at(pygame.mouse.get_pos())
-    ang = ang + 1
-    if ang == 360:
-        ang = 0
-    ray.show(GAME_SURFACE)
+    # ray.look_at_angle(ang)
+    particle.position_at(pygame.mouse.get_pos())
+    particle.show(GAME_SURFACE)
 
-    point = ray.cast(wall)
-    if point:
-        pass
-        pygame.draw.circle(GAME_SURFACE, GREEN, point, 5)
+    particle.cast(GAME_SURFACE, wall)
 
     pygame.display.update()
     CLOCK.tick(60)
