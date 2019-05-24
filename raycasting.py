@@ -6,6 +6,7 @@ import pygame
 DISPLAY_WIDTH = 1280
 DISPLAY_HEIGHT = 720
 BLACK = (0, 0, 0)
+GREEN = (0, 255, 0)
 
 pygame.init()
 pygame.display.set_caption(f"2D Raycasting")
@@ -22,7 +23,9 @@ GAME_QUIT = False
 
 
 wall = Boundary(300, 300, 300, 100)
-ray = Ray(100, 100, 90)
+ray = Ray(100, 200, 0)
+
+ang = 0
 
 while not GAME_QUIT:
 
@@ -36,7 +39,18 @@ while not GAME_QUIT:
             pass
 
     wall.show(GAME_SURFACE)
+
+    ray.look_at_angle(ang)
+    ray.position_at(pygame.mouse.get_pos())
+    ang = ang + 1
+    if ang == 360:
+        ang = 0
     ray.show(GAME_SURFACE)
+
+    point = ray.cast(wall)
+    if point:
+        pass
+        pygame.draw.circle(GAME_SURFACE, GREEN, point, 5)
 
     pygame.display.update()
     CLOCK.tick(60)
