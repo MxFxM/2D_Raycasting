@@ -15,7 +15,6 @@ class Ray:
     def show(self, surface):
         endpos = [round(p+d*10)
                   for p, d in zip(self.position, self.direction)]
-        print(endpos)
         pygame.draw.line(surface, WHITE, self.position, endpos)
 
 
