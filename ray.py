@@ -1,4 +1,5 @@
 import math
+import pygame
 
 WHITE = (255, 255, 255)
 
@@ -14,3 +15,7 @@ class Ray:
     def show(self, surface):
         pygame.draw.line(surface, WHITE, self.position, (round((p+d)*10)
                                                          for p, d in zip(self.position, self.direction)))
+
+
+if __name__ == '__main__':
+    print("Please run raycasting.py as main.")

@@ -1,4 +1,5 @@
 from boundary import Boundary
+from ray import Ray
 import pygame
 
 # Define constants
@@ -20,7 +21,8 @@ BACKGROUND.fill(BLACK)
 GAME_QUIT = False
 
 
-b = Boundary(300, 300, 300, 100)
+wall = Boundary(300, 300, 300, 100)
+ray = Ray(100, 100, 0)
 
 while not GAME_QUIT:
 
@@ -33,7 +35,7 @@ while not GAME_QUIT:
             # print(event)
             pass
 
-    b.show(GAME_SURFACE)
+    wall.show(GAME_SURFACE)
 
     pygame.display.update()
     CLOCK.tick(60)
