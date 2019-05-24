@@ -22,7 +22,7 @@ GAME_QUIT = False
 
 
 wall = Boundary(300, 300, 300, 100)
-ray = Ray(100, 100, 0)
+ray = Ray(100, 100, 90)
 
 while not GAME_QUIT:
 
@@ -36,6 +36,7 @@ while not GAME_QUIT:
             pass
 
     wall.show(GAME_SURFACE)
+    ray.show(GAME_SURFACE)
 
     pygame.display.update()
     CLOCK.tick(60)
