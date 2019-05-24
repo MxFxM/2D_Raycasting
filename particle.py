@@ -1,5 +1,6 @@
 from ray import Ray
 import pygame
+import math
 
 
 GREEN = (0, 255, 0)
@@ -14,6 +15,7 @@ class Particle:
             self.rays.append(Ray(x, y, 360 * i / beams))
 
     def position_at(self, pos):
+        self.position = pos
         for ray in self.rays:
             ray.position_at(pos)
 
@@ -21,11 +23,20 @@ class Particle:
         for ray in self.rays:
             ray.show(gs)
 
-    def cast(self, gs, wall):
+    def cast(self, gs, walls):
         for ray in self.rays:
-            point = ray.cast(wall)
-            if point:
-                pygame.draw.circle(gs, GREEN, point, 5)
+            closest_dist = math.inf
+            closest_point = False
+            for wall in walls:
+                point = ray.cast(wall)
+                if point:
+                    dist = math.sqrt((point[0] - self.position[0])**2
+                                     + (point[1] - self.position[1])**2)
+                    if dist < closest_dist:
+                        closest_dist = dist
+                        closest_point = point
+            if closest_point:
+                pygame.draw.line(gs, GREEN, self.position, closest_point)
 
 
 if __name__ == '__main__':

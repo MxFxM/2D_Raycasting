@@ -1,6 +1,7 @@
 from boundary import Boundary
 from particle import Particle
 import pygame
+import random
 
 # Define constants
 DISPLAY_WIDTH = 1280
@@ -21,9 +22,14 @@ BACKGROUND.fill(BLACK)
 
 GAME_QUIT = False
 
-
-wall = Boundary(300, 300, 300, 100)
-particle = Particle(500, 500, 10)
+walls = []
+for _ in range(5):
+    x1 = random.random() * DISPLAY_WIDTH
+    y1 = random.random() * DISPLAY_HEIGHT
+    x2 = random.random() * DISPLAY_WIDTH
+    y2 = random.random() * DISPLAY_HEIGHT
+    walls.append(Boundary(x1, y1, x2, y2))
+particle = Particle(500, 500, 360)
 
 while not GAME_QUIT:
 
@@ -36,13 +42,13 @@ while not GAME_QUIT:
             # print(event)
             pass
 
-    wall.show(GAME_SURFACE)
+    for wall in walls:
+        wall.show(GAME_SURFACE)
 
-    # ray.look_at_angle(ang)
+    particle.cast(GAME_SURFACE, walls)
+
     particle.position_at(pygame.mouse.get_pos())
-    particle.show(GAME_SURFACE)
-
-    particle.cast(GAME_SURFACE, wall)
+    # particle.show(GAME_SURFACE)
 
     pygame.display.update()
     CLOCK.tick(60)
